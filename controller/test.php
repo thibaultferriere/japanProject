@@ -8,10 +8,10 @@
 	$password = 'limu828';
 	//$charset = 'utf8';
 
-	echo "bonjour";
+	echo "bonjour<br/>";
 
-	/*
-	$dsn = "mysql:host=$host;port=$port;dbname=$db";
+
+	$dsn = "mysql:host=$host;dbname=$db";
 
 	$opt = [
 		PDO::ATTR_ERRMODE		=> PDO::ERRMODE_EXCEPTION,
@@ -22,10 +22,11 @@
 	$conn = new PDO($dsn, $user, $password, $opt);
 	//$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-	$stmt = $pdo->prepare('SELECT NAME FROM tableTest');
-	$stmt->execute();
-	$user = $stmt->fetch();
-	print_r($user);
-	echo $user;
-	*/
+	$query = $conn->prepare('SELECT NAME FROM tableTest');
+	$query->execute();
+	$results = $query->fetchAll();
+	//print_r($result);
+	foreach($results as $row){
+		echo $row['NAME']."<br/>";
+	}
 ?>
