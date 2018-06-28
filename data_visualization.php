@@ -24,7 +24,7 @@
 			foreach($results as $row){
 				echo "Unit ID: ".$row['unit_id']."<br/>";
 				echo "Timestamp: ".$row['timestamp']."<br/>";
-				echo "UUID: ".$row['uuid']."<br/>";\
+				echo "UUID: ".$row['uuid']."<br/>";
 				echo "Randomized: ".$row['randomized']."<br/>";
 				echo "RNG: ".$row['rng']."<br/>";
 				echo "RSSI: ".$row['rssi']."<br/>";
