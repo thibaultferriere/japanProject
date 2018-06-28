@@ -8,7 +8,7 @@
 	$password = 'limu828';
 	//$charset = 'utf8';
 
-	echo "bonjour<br/>";
+	echo "bonjour<br/><br/>";
 
 
 	$dsn = "mysql:host=$host;dbname=$db";
@@ -27,6 +27,8 @@
 	$results = $query->fetchAll();
 	//print_r($result);
 	foreach($results as $row){
-		echo $row['NAME']."<br/>";
+		echo "NAME: ".$row['NAME']."<br/>";
 	}
+
+	//header('Location: http://ec2-13-231-7-166.ap-northeast-1.compute.amazonaws.com/data_visualization.php');
 ?>
