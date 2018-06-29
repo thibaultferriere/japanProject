@@ -17,18 +17,15 @@
 			];
 			$conn = new PDO($dsn, $user, $password, $opt);
 
-			$query = $conn->prepare('SELECT * FROM alldata');
+			$query = $conn->prepare('SELECT unit_id, uuid FROM alldata LIMIT 10000');
 			$query->execute();
 			$results = $query->fetchAll();
 
 			foreach($results as $row){
 				echo "Unit ID: ".$row['unit_id']."<br/>";
-				echo "Timestamp: ".$row['timestamp']."<br/>";
-				echo "UUID: ".$row['uuid']."<br/>";
-				echo "Randomized: ".$row['randomized']."<br/>";
-				echo "RNG: ".$row['rng']."<br/>";
-				echo "RSSI: ".$row['rssi']."<br/>";
-			}
+                echo "UUID: ".$row['uuid']."<br/>";
+                echo "<br/>";
+            }
 		?>
 	</body>
 </html>
