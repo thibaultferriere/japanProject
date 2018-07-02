@@ -1,0 +1,97 @@
+192.168.0.101 - - [21/Feb/2017 13:45:08] "GET / HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:45:08] code 404, message File not found
+192.168.0.101 - - [21/Feb/2017 13:45:08] "GET /favicon.ico HTTP/1.1" 404 -
+192.168.0.101 - - [21/Feb/2017 13:45:14] "GET /cgi-bin/heatmap.py HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:45:17] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:45:17] "GET /heatmap.min.js HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:45:17] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:45:17] "GET /cc-heatmap.js HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:45:34] "GET /cgi-bin/heatmap.py?datetime=201702210740 HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:45:37] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:45:37] "GET /heatmap.min.js HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:45:37] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:45:37] "GET /cc-heatmap.js HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:46:01] "GET /cgi-bin/heatmap.py?datetime=201702200740 HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:46:04] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:46:04] "GET /heatmap.min.js HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:46:04] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+192.168.0.101 - - [21/Feb/2017 13:46:04] "GET /cc-heatmap.js HTTP/1.1" 200 -
+192.168.0.91 - - [22/Feb/2017 07:51:33] "GET / HTTP/1.1" 200 -
+192.168.0.91 - - [22/Feb/2017 07:51:47] "GET / HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 08:15:30] "GET /cgi-bin/heatmap.py HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 08:15:32] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 08:15:32] "GET /heatmap.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 08:15:32] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 08:15:33] "GET /cc-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 08:15:40] code 404, message File not found
+133.5.5.48 - - [22/Feb/2017 08:15:40] "GET /favicon.ico HTTP/1.1" 404 -
+133.5.5.48 - - [22/Feb/2017 08:15:52] "GET /cgi-bin/heatmap.py?datetime=201702210810 HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 08:16:57] "GET /cgi-bin/heatmap.py?datetime=201702211110 HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 08:17:28] "GET /cgi-bin/heatmap.py?datetime=201702201110 HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 08:18:20] "GET /cgi-bin/heatmap.py?datetime=201702031110 HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 11:29:40] "GET /cgi-bin/heatmap.py?datetime=201702031110 HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 11:29:43] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 11:29:43] "GET /heatmap.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 11:29:43] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 11:29:43] "GET /cc-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 13:02:04] "GET /cgi-bin/heatmap.py?datetime=201701271100 HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 13:07:37] "GET /cgi-bin/heatmap.py?datetime=201701271100 HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 13:58:48] "GET /cgi-bin/heatmap.py?datetime=201701271600 HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 13:58:52] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 13:58:52] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 13:58:52] "GET /heatmap.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [22/Feb/2017 13:58:52] "GET /cc-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 01:52:16] "GET /cgi-bin/heatmap.py?datetime=201702031110 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 01:52:19] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 01:52:19] "GET /heatmap.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 01:52:19] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 01:52:20] "GET /cc-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 01:52:24] "GET /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:03:48] "HEAD /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:03:52] "GET /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:03:56] "GET /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:03:59] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:03:59] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:03:59] "GET /heatmap.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:04:03] "GET /cc-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:04:04] code 404, message File not found
+133.5.5.48 - - [24/Feb/2017 02:04:04] "GET /favicon.ico HTTP/1.1" 404 -
+133.5.5.48 - - [24/Feb/2017 02:32:33] "GET /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:32:37] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:32:37] "GET /heatmap.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:32:37] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:32:37] "GET /cc-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:33:04] "GET /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:33:07] "GET /cc-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:33:07] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:33:07] "GET /heatmap.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:33:07] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:33:07] code 404, message File not found
+133.5.5.48 - - [24/Feb/2017 02:33:07] "GET /favicon.ico HTTP/1.1" 404 -
+133.5.5.48 - - [24/Feb/2017 02:33:46] "GET /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:33:50] "GET /heatmap.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:33:50] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:33:50] code 404, message File not found
+133.5.5.48 - - [24/Feb/2017 02:33:50] "GET /favicon.ico HTTP/1.1" 404 -
+133.5.5.48 - - [24/Feb/2017 02:33:50] "GET /cc-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:33:50] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:34:30] "GET /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:34:59] "GET /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:35:03] code 404, message File not found
+133.5.5.48 - - [24/Feb/2017 02:35:03] "GET /favicon.ico HTTP/1.1" 404 -
+133.5.5.48 - - [24/Feb/2017 02:35:03] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:35:03] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:35:03] "GET /heatmap.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:35:03] "GET /cc-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:35:39] "GET /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:35:43] code 404, message File not found
+133.5.5.48 - - [24/Feb/2017 02:35:43] "GET /favicon.ico HTTP/1.1" 404 -
+133.5.5.48 - - [24/Feb/2017 02:35:43] "GET /jquery-3.1.1.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:35:43] "GET /heatmap.min.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:35:43] "GET /leaflet-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:35:43] "GET /cc-heatmap.js HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:35:46] code 404, message File not found
+133.5.5.48 - - [24/Feb/2017 02:35:46] "GET /favicon.ico HTTP/1.1" 404 -
+133.5.5.48 - - [24/Feb/2017 02:37:04] "GET /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:38:29] "GET /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
+133.5.5.48 - - [24/Feb/2017 02:49:21] "GET /cgi-bin/heatmap.py?datetime=201702031200 HTTP/1.1" 200 -
