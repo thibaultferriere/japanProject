@@ -22,7 +22,7 @@ def to_unixtime(pd_ts):
 
 fs = cgi.FieldStorage()
 print('Content-type: text/html\n')
-t = Template(open('./template_index.html').read())
+t = Template(open('../template_index.html').read())
 # message = fs.getfirst('message', None)
 # if message is not None:
 #     flag_sent = True
