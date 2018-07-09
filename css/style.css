@@ -7,11 +7,15 @@ iframe{
     height: 700px;
 }
 
-#chart{
+#k-now-chart{
     float: right;
 }
 
 .chart-container{
-    height: 1000px;
-    width: 100%;
+    margin-bottom: 10px;
+    height: 600px;
+}
+
+.chart{
+    width: 49%;
 }

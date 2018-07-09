@@ -14,6 +14,7 @@
 
 	$conn = new PDO($dsn, $user, $password, $opt); //connection to the database
 
+    //Example query to make a random chart
     $query = $conn->prepare('SELECT spot_id, congestion FROM campus_nowcasts_scaled LIMIT 500');    //preparation of the query
 	$query->execute(); //execute the query
 	$result = $query->fetchAll();  //fetching the results in an array
