@@ -20,7 +20,7 @@
     $result = $query->fetchAll();
     foreach($result as  $index => $cell){
 //        var_dump($cell);
-        $result[$index]['calculated_at'] = date('m/d/Y H:i', $result[$index]['calculated_at']);
+        $result[$index]['calculated_at'] = date('m/d/y H:i', $result[$index]['calculated_at']);
 //        var_dump($cell);
 //        print_r("<br/>");
     }

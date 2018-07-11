@@ -1,21 +1,4 @@
-body{
-    
-}
-
 iframe{
-    width: 49%;
+    width: 100%;
     height: 700px;
-}
-
-#k-now-chart{
-    float: right;
-}
-
-.chart-container{
-    margin-bottom: 10px;
-    height: 600px;
-}
-
-.chart{
-    width: 49%;
 }
