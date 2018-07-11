@@ -92,7 +92,7 @@ def conv_total_color(total):
 
 fs = cgi.FieldStorage()
 print('Content-type: text/html\n')
-t = Template(open('./template_movemapindex.html').read())
+t = Template(open('../template_movemapindex.html').read())
 
 date_e = fs.getfirst('datetime', None)
 if date_e is None:

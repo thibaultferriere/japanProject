@@ -31,10 +31,17 @@ t = Template(open('../template_index.html').read())
 date_e = fs.getfirst('datetime', None)
 if date_e is None:
     # date_str = pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')
-    date_unixtime = time.mktime(pd.Timestamp.now().to_datetime().timetuple())
+#    date_unixtime = time.mktime(pd.Timestamp.now().to_datetime().timetuple())
+    date_unixtime =  time.mktime(datetime.datetime.now().timetuple())    
 else:
     # date_str = pd.Timestamp(date_e).strftime('%Y-%m-%d %H:%M:%S')
-    date_unixtime = time.mktime(pd.Timestamp(date_e).to_datetime().timetuple())
+#    date_unixtime = time.mktime(pd.Timestamp(date_e).to_datetime().timetuple())
+#    print(date_e)
+    # formatting the string passed in the form so i is %Y/%m/%d %H:%M
+    date_e_tmp = date_e[:4] + "/" + date_e[4:6] + "/" + date_e[6:8] + " " + date_e[8:10] + ":" + date_e[10:12]
+#    print(date_e_tmp)
+    date_e = date_e_tmp
+    date_unixtime = time.mktime(datetime.datetime.strptime(date_e, "%Y/%m/%d %H:%M").timetuple())
 # html = t.substitute({'sent': '送信しました' if flag_sent else ''})
 # debug = date_str
 debug = str(pd.Timestamp(date_e))
@@ -42,7 +49,7 @@ debug = str(pd.Timestamp(date_e))
 dbname = 'campustraffic'
 tblname = 'campus_nowcasts_scaled'
 #con = MySQLdb.connect(host='192.168.0.51', user='crw', passwd='receiver00', db='aibeacon')
-con = MySQLdb.connect(host='192.168.0.51', user='vagrant', passwd='act0001', db='campustraffic')
+con = MySQLdb.connect(host='localhost', user='phpmyadmin', passwd='limu828', db='campustraffic')
 #query = 'select * from alldata order by timestamp desc limit 100'
 #query = 'select * from unit_spot_lut'
 #query = 'select * from campus_nowcasts order by calculated_at desc limit 100'
@@ -82,7 +89,7 @@ def getJSONforCongestion(date_unixtime):
     ], columns=['spot_id', 'lat', 'lng', 'spot_name'])
     df2 = pd.merge(df, coord, on='spot_id', how='inner')
     # debug = debug + str(df2)
-    df2.to_csv('./tmp.csv', index=False)
+    df2.to_csv('../tmp.csv', index=False)
     df2['calculated_at'] = df2['calculated_at'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M:%S'))
 # json.dump(df2.to_dict('records'), open('./tmp.json', 'w'))
     testData = {'max':100, 'data':df2.to_dict('records')}
@@ -96,7 +103,7 @@ def getJSONStrforCongestion(date_unixtime):
     return json.dumps(testData)
 
 testData_str = getJSONStrforCongestion(date_unixtime)
-open('./tmp.txt', 'w').write(testData_str)
+open('../tmp.txt', 'w').write(testData_str)
 testDataList = []
 date_i = date_unixtime
 # while date_i < date_unixtime + 60*600:
@@ -109,7 +116,7 @@ while date_i < date_unixtime + 60*60*5:
     # logger.error(str(date_i))
     pass
 testDataList_str = json.dumps(testDataList)
-open('./tmp.txt', 'w').write(testDataList_str)
+open('../tmp.txt', 'w').write(testDataList_str)
 
 # html = t.substitute({'testData':testData_str, 'debug':debug})
 html = t.substitute({'testData':testData_str, 'testDataList':testDataList_str, 'debug':debug})
