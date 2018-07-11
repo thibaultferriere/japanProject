@@ -96,10 +96,16 @@ t = Template(open('../template_movemapindex.html').read())
 
 date_e = fs.getfirst('datetime', None)
 if date_e is None:
-    date_unixtime = time.mktime(pd.to_datetime('2017-09-16 00:00').timetuple())
+#    date_unixtime = time.mktime(pd.to_datetime('2017-09-16 00:00').timetuple())
+    date_unixtime =  time.mktime(datetime.datetime.now().timetuple())
     # date_unixtime = time.mktime(pd.Timestamp.now().to_datetime().timetuple()) # 現在までのデータがローカルにはないから9/17 
 else:
-    date_unixtime = time.mktime(pd.Timestamp(date_e).to_datetime().timetuple())
+#    date_unixtime = time.mktime(pd.Timestamp(date_e).to_datetime().timetuple())
+    # formatting the string passed in the form so i is %Y/%m/%d %H:%M
+    date_e_tmp = date_e[:4] + "/" + date_e[4:6] + "/" + date_e[6:8] + " " + date_e[8:10] + ":" + date_e[10:12]
+#    print(date_e_tmp)
+    date_e = date_e_tmp
+    date_unixtime = time.mktime(datetime.datetime.strptime(date_e, "%Y/%m/%d %H:%M").timetuple())
 debug = str(pd.Timestamp(date_e))
 
 dbname = 'movecount'
