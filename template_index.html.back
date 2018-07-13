@@ -2,13 +2,12 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
         <link rel="stylesheet" href="https://rawgithub.com/dbushell/Pikaday/master/css/pikaday.css" type="text/css" />
-        <link rel="stylesheet" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="/css/leaflet.awesome-markers.css">
         <style type="text/css">
-.movemap-wrapper { height:600px; background:rgba(0,0,0,.03); border:3px solid black; }
-.movemap { width:100%; height:100%; }
+.heatmap-wrapper { height:600px; background:rgba(0,0,0,.03); border:3px solid black; }
+.heatmap { width:100%; height:100%; }
+.heatmap2 {height:400px; border:1px solid;}
         </style>
     </head>
     <body>
@@ -16,7 +15,7 @@
             Hello, World!
         </div>
         <div>
-            <form action="./movemap.py" method="get" onsubmit="return compose_datetime();">
+            <form action="/cgi-bin/heatmap.py" method="get" onsubmit="return compose_datetime();">
                 <!-- <input type="text" id="datepicker" name="date"> -->
                 <input type="text" id="datepicker">
                 <!-- <select name="hour" id="select_hour"></select> -->
@@ -24,26 +23,46 @@
                 :
                 <!-- <select name="minute" id="select_minute"></select> -->
                 <select id="select_minute"></select>
+                <!-- <select name="minute"> -->
+                <!--     <option value="1">1</option> -->
+                <!--     <option value="2">2</option> -->
+                <!--     <option value="3">3</option> -->
+                <!--     <option value="4">4</option> -->
+                <!--     <option value="5">5</option> -->
+                <!--     <option value="6">6</option> -->
+                <!--     <option value="7">7</option> -->
+                <!--     <option value="8">8</option> -->
+                <!--     <option value="9">9</option> -->
+                <!--     <option value="10">10</option> -->
+                <!--     <option value="11">11</option> -->
+                <!--     <option value="12">12</option> -->
+                <!-- </select> -->
+                <!-- <button type="submit" name="action" value="go">GO</button> -->
                 <button type="submit" value="go">GO</button>
                 <input type="hidden" name="datetime" id="input_datetime">
             </form>
         </div>
-        <div class="movemap-wrapper">
-            <div class="movemap" id="map-canvas">
+        <div class="heatmap-wrapper">
+            <div class="heatmap" id="map-canvas">
             </div>
         </div>
         <div>
             <button type="button" onclick="play()" id="play_button">Pause</button>
-            <input type="range" name="smp02" value="1" min="0" max="29" id="pos_play" style="width:400px;" onclick="jump()">
+            <input type="range" name="smp02" value="1" min="0" max="99" id="pos_play" style="width:400px;" onclick="jump()">
             <span id="current_date"></span>
         </div>
+        <!-- <div class="heatmap2"> -->
+        <!-- </div> -->
         <div style="display:none;">
             ${debug}
         </div>
-        <script type="text/javascript" src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
-        <script src="/js/leaflet.migrationLayer.js"></script>
-        <script src="/js/leaflet.awesome-markers.js"></script>
+        <!-- <script type="text/javascript" src="./leaflet.js"></script> -->
         <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
+        <script type="text/javascript" src="/js/heatmap.min.js"></script>
+        <!-- <script type="text/javascript" src="https://rawgit.com/pa7/heatmap.js/master/build/heatmap.js"></script> -->
+        <script type="text/javascript" src="/js/leaflet-heatmap.js"></script>
+        <!-- <script type="text/javascript" src="https://rawgit.com/pa7/heatmap.js/develop/plugins/leaflet&#45;heatmap/leaflet&#45;heatmap.js"></script> -->
         <script type="text/javascript" src="http://momentjs.com/downloads/moment.js"></script>
         <script type="text/javascript" src="https://rawgithub.com/dbushell/Pikaday/master/pikaday.js"></script>
         <script type="text/javascript">
@@ -54,7 +73,8 @@ console.log(testDataList);
 
 var picker = new Pikaday({ field: document.getElementById('datepicker') });
 
-for(var i=0; i<24; i++){
+for(var i=0; i<24; i++) {
+    //$$("#select_hour").append($$("<option>").val(i).text(i));
     var hour = ("00"+i).slice(-2);
     $$("#select_hour").append($$("<option>").val(hour).text(hour));
 }
@@ -104,6 +124,7 @@ if(!datepicker_inited) {
 }
 
 
+
 function compose_datetime() {
     var m = moment($$("#datepicker").val() + " " + $$("#select_hour").val() + ":" + $$("#select_minute").val());
     $$("#input_datetime").val(m.format("YYYYMMDDHHmm"));
@@ -124,10 +145,9 @@ function play() {
 }
 
 function jump() {
-    //if $$("pos_play").hasClass("range_30"){ var divisor = 30} elseif $$("pos_play").hasClass("range_100"){ var divisor = 100}
-    iNextLayer = testDataList.length * $$("#pos_play").val() / 30;
+    iNextLayer = testDataList.length * $$("#pos_play").val() / 100;
 }
         </script>
-        <script type="text/javascript" src="/js/cc-movemap.js"></script>
+        <script type="text/javascript" src="/js/cc-heatmap.js"></script>
 </body>
 </html>
