@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+        <link rel="stylesheet" href="https://rawgithub.com/dbushell/Pikaday/master/css/pikaday.css" type="text/css" />
+        <link rel="stylesheet" href="/css/font-awesome-4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="/css/leaflet.awesome-markers.css">
+        <style type="text/css">
+.movemap-wrapper { height:600px; background:rgba(0,0,0,.03); border:3px solid black; }
+.movemap { width:100%; height:100%; }
+        </style>
+    </head>
+    <body>
+        <div style="display:none;">>
+            Hello, World!
+        </div>
+        <div>
+            <form action="./movemap.py" method="get" onsubmit="return compose_datetime();">
+                <!-- <input type="text" id="datepicker" name="date"> -->
+                <input type="text" id="datepicker">
+                <!-- <select name="hour" id="select_hour"></select> -->
+                <select id="select_hour"></select>
+                :
+                <!-- <select name="minute" id="select_minute"></select> -->
+                <select id="select_minute"></select>
+                <button type="submit" value="go">GO</button>
+                <input type="hidden" name="datetime" id="input_datetime">
+            </form>
+        </div>
+        <div class="movemap-wrapper">
+            <div class="movemap" id="map-canvas">
+            </div>
+        </div>
+        <div>
+            <button type="button" onclick="play()" id="play_button">Pause</button>
+            <input type="range" name="smp02" value="1" min="0" max="29" id="pos_play" style="width:400px;" onclick="jump()">
+            <span id="current_date"></span>
+        </div>
+        <div style="display:none;">
+            ${debug}
+        </div>
+        <script type="text/javascript" src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+        <script src="/js/leaflet.migrationLayer.js"></script>
+        <script src="/js/leaflet.awesome-markers.js"></script>
+        <script type="text/javascript" src="/js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="http://momentjs.com/downloads/moment.js"></script>
+        <script type="text/javascript" src="https://rawgithub.com/dbushell/Pikaday/master/pikaday.js"></script>
+        <script type="text/javascript">
+testData = JSON.parse('${testData}');
+testDataList = JSON.parse('${testDataList}');
+console.log(testData);
+console.log(testDataList);
+
+var picker = new Pikaday({ field: document.getElementById('datepicker') });
+
+for(var i=0; i<24; i++){
+    var hour = ("00"+i).slice(-2);
+    $$("#select_hour").append($$("<option>").val(hour).text(hour));
+}
+for(var i=0; i<60; i+=10) {
+    var minute = ("00"+i).slice(-2);
+    $$("#select_minute").append($$("<option>").val(minute).text(minute));
+}
+
+datepicker_inited = false;
+var url = location.href;
+console.log(url);
+var url_split = url.split("?");
+if(url_split.length > 1) {
+    var params = url_split[1].split("&");
+    for(i=0; i<params.length; i++) {
+        var params_split = params[i].split("=");
+        var key = '';
+        var value = '0';
+        if(params_split.length >= 1) {
+            key = params_split[0];
+            if(params_split.length > 1) {
+                value = params_split[1];
+            }
+        }
+        else {
+            key = params[i];
+        }
+        if(key == "datetime") {
+            var m = moment(value, "YYYYMMDDHHmm");
+            $$("#datepicker").val(m.format("YYYY-MM-DD"));
+            $$("#select_hour").val(m.format("HH"));
+            $$("#select_minute").val(m.format("mm"));
+            datepicker_inited = true;
+        }
+    }
+}
+
+if(!datepicker_inited) {
+    var m = moment();
+    var hour = m.format("HH");
+    var hour_filled = ("00"+hour).slice(-2);
+    var minute = Math.floor(m.format("mm")/10)*10;
+    var minute_filled = ("00"+minute).slice(-2);
+    $$("#datepicker").val(m.format("YYYY-MM-DD"));
+    $$("#select_hour").val(hour_filled);
+    $$("#select_minute").val(minute_filled);
+}
+
+
+function compose_datetime() {
+    var m = moment($$("#datepicker").val() + " " + $$("#select_hour").val() + ":" + $$("#select_minute").val());
+    $$("#input_datetime").val(m.format("YYYYMMDDHHmm"));
+    console.log(m);
+    return true;
+}
+
+var fPlay = true;
+function play() {
+    if(fPlay == true) {
+        fPlay = false;
+        $$("#play_button").text("Play");
+    }
+    else {
+        fPlay = true;
+        $$("#play_button").text("Pause");
+    }
+}
+
+function jump() {
+    //if $$("pos_play").hasClass("range_30"){ var divisor = 30} elseif $$("pos_play").hasClass("range_100"){ var divisor = 100}
+    iNextLayer = testDataList.length * $$("#pos_play").val() / 30;
+}
+        </script>
+        <script type="text/javascript" src="/js/cc-movemap.js"></script>
+</body>
+</html>

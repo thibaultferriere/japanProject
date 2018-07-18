@@ -6,7 +6,7 @@ var baseLayer = L.tileLayer(
 );
 console.log(baseLayer);
 
-var lrmap = new L.map('map-canvas-movemap').setView([33.597324, 130.223160], 18);
+var lrmap = new L.map('map-canvas').setView([33.597324, 130.223160], 18);
 baseLayer.addTo(lrmap);
 console.log(lrmap);
 
@@ -100,10 +100,10 @@ for (var i = 0; i < spotCoordList.length; i++) {
 
 //making layerlist of movemap
 movemapLayerList = [];
-for (var i = 0; i < movemapDataList.length; i++) {
+for (var i = 0; i < testDataList.length; i++) {
   var Layer = new L.migrationLayer({
     map: lrmap,
-    data: movemapDataList[i]['data'],
+    data: testDataList[i]['data'],
     pulseRadius: 0.1,
     arcWidth: 0.5,
     arcLabel: false,
@@ -117,25 +117,25 @@ movemapLayerList[0].addTo(lrmap);
 
 var iCurrentLayer = 0;
 var iNextLayer = 1;
-if (iNextLayer == movemapDataList.length) {
+if (iNextLayer == testDataList.length) {
   iNextLayer = 0;
 }
 
 var id = setInterval(function () {
-  if (fPlay_movemap) {
+  if (fPlay) {
     movemapLayerList[iCurrentLayer].destroy();//これじゃダメ
     console.log(movemapLayerList[iCurrentLayer]);
     iCurrentLayer = iNextLayer;
     console.log(iNextLayer);
     movemapLayerList[iNextLayer].addTo(lrmap);
     iNextLayer++;
-    if (iNextLayer == movemapDataList.length) {
+    if (iNextLayer == testDataList.length) {
       clearInterval(id)
       // iNextLayer = 0;
     }
     // movemapLayerList[iCurrentLayer].setData(testDataList[iNextLayer]['data'])
-    $("#current_date_movemap").text(movemapDataList[iCurrentLayer]['time']);
-    $("#pos_play_movemap").val(iCurrentLayer / movemapDataList.length * 30);
+    $("#current_date").text(testDataList[iCurrentLayer]['time']);
+    $("#pos_play").val(iCurrentLayer / testDataList.length * 30);
 
 
     // if(!!Layer){

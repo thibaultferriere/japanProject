@@ -143,19 +143,20 @@ function heatmap(){
     // }, 1000);
 
     var iCurrentLayer = 0;
-    var iNextLayer = 1;
-    if(iNextLayer == heatmapLayerList.length) {
-        iNextLayer = 0;
+//    var iNextLayer = 1;
+    iNextLayer_heatmap = 1;
+    if(iNextLayer_heatmap == heatmapLayerList.length) {
+        iNextLayer_heatmap = 0;
     }
     setInterval(function(){
-        console.log('toto');
-        if(fPlay) {
+//        console.log('toto');
+        if(fPlay_heatmap) {
             heatmapLayerList[iCurrentLayer].removeFrom(map);
-            iCurrentLayer = iNextLayer;
-            console.log(iNextLayer);
-            iNextLayer++;
-            if(iNextLayer == heatmapLayerList.length) {
-                iNextLayer = 0;
+            iCurrentLayer = iNextLayer_heatmap;
+            console.log(iNextLayer_heatmap);
+            iNextLayer_heatmap++;
+            if(iNextLayer_heatmap == heatmapLayerList.length) {
+                iNextLayer_heatmap = 0;
             }
             heatmapLayerList[iCurrentLayer].addTo(map);
             // console.log(typeof(heatmapLayerList[iCurrentLayer]));
