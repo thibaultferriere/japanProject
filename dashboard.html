@@ -113,8 +113,6 @@
             <script src="/js/leaflet.awesome-markers.js"></script>
             <script type="text/javascript" src="/js/cc-heatmap.js"></script>
             <script type="text/javascript">
-//            testData = JSON.parse('${testData1}');
-//            testDataList = JSON.parse('${testDataList1}');
             console.log(testData);
             console.log("testDataList heatmap: ", testDataList);
             console.log("test retrieve element: ", testDataList[0].data[0]);
@@ -208,6 +206,8 @@
 //            movemapDataList = JSON.parse('${testDataList2}');
             console.log(movemapData);
             console.log(movemapDataList);
+                
+            var iNextLayer = 1;
 
             var picker = new Pikaday({ field: document.getElementById('datepicker_movemap') });
 
@@ -285,8 +285,8 @@
             function jump_movemap() {
 //                console.warn('current value iNextLayer: ' + iNextLayer);
 //                var divisor = 100;
-//                console.warn('length: ' + testDataList.length + ' valeur: ' + $$("#pos_play_heatmap").val() + ' divisor: ' + divisor);
-                iNextLayer = testDataList.length * $$("#pos_play_movemap").val() / 30;
+//                console.warn('length: ' + movemapDataList.length + ' valeur: ' + $$("#pos_play_movemap").val());
+                iNextLayer = movemapDataList.length * $$("#pos_play_movemap").val() / 30;
 //                console.warn('new value iNextLayer: ' + iNextLayer);
             }
             </script>
