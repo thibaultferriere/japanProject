@@ -58,13 +58,13 @@
                         <div class="heatmap" id="map-canvas-heatmap">
                         </div>
                     </div>
-                    <div>
-                        <button type="button" onclick="play_heatmap()" id="play_button_heatmap">Pause</button>
-                        <input type="range" name="smp02" value="1" min="0" max="99" id="pos_play_heatmap" class="range_100" style="width:400px;" onclick="jump_heatmap()">
-                        <span id="current_date_heatmap"></span>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <button type="button" onclick="play_heatmap()" id="play_button_heatmap" class="col-md-2">Pause</button>
+                            <input type="range" name="smp02" value="1" min="0" max="99" id="pos_play_heatmap" class="col-md-8" style="width:400px;" onclick="jump_heatmap()">
+                            <span id="current_date_heatmap" class="col-md-2"></span>
+                        </div>
                     </div>
-                    <!-- <div class="heatmap2"> -->
-                    <!-- </div> -->
                     <div style="display:none;">
                         ${debug1}
                     </div>
@@ -88,10 +88,12 @@
                         <div class="movemap" id="map-canvas-movemap">
                         </div>
                     </div>
-                    <div>
-                        <button type="button" onclick="play_movemap()" id="play_button_movemap">Pause</button>
-                        <input class="range_30" type="range" name="smp02" value="1" min="0" max="29" id="pos_play_movemap" style="width:400px;" onclick="jump_movemap()">
-                        <span id="current_date_movemap"></span>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <button type="button" onclick="play_movemap()" id="play_button_movemap" class="col-md-2">Pause</button>
+                            <input class="col-md-8" type="range" name="smp02" value="1" min="0" max="29" id="pos_play_movemap" style="width:400px;" onclick="jump_movemap()">
+                            <span id="current_date_movemap" class="col-md-2"></span>
+                        </div>
                     </div>
                     <div style="display:none;">
                         ${debug2}
