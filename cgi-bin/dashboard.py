@@ -52,7 +52,7 @@ def heatmap():
     dbname = 'campustraffic'
     tblname = 'campus_nowcasts_scaled'
     #con = MySQLdb.connect(host='192.168.0.51', user='crw', passwd='receiver00', db='aibeacon')
-    con = MySQLdb.connect(host='localhost', user='phpmyadmin', passwd='limu828', db='campustraffic')
+    con = MySQLdb.connect(host='localhost', user='student', passwd='crw2018', db='campustraffic')
     #query = 'select * from alldata order by timestamp desc limit 100'
     #query = 'select * from unit_spot_lut'
     #query = 'select * from campus_nowcasts order by calculated_at desc limit 100'
@@ -220,10 +220,12 @@ def movemap():
         date_unixtime = time.mktime(datetime.datetime.strptime(date_e, "%Y/%m/%d %H:%M").timetuple())
     debug = str(pd.Timestamp(date_e))
 
-    dbname = 'movecount'
+    dbname = 'campusanalytics'
     tblname = 'movecount_10m'
 
-    con = pymysql.connect(host='localhost', user='phpmyadmin', passwd='limu828', db=dbname)
+#    con = pymysql.connect(host='localhost', user='student', passwd='crw2018', db=dbname)
+#   PyMySQL connector not working properly; switched to MySQLdb connector
+    con = MySQLdb.connect(host='localhost', user='student', passwd='crw2018', db=dbname)
 
 
     # 移動人数可視化のためのJSONファイル作成

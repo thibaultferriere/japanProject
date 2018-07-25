@@ -6,6 +6,7 @@ from string import Template
 import json
 import datetime
 import time
+import math
 import MySQLdb
 import pymysql.cursors
 import pandas as pd
@@ -34,7 +35,7 @@ def heatmap():
     if date_e is None:
         # date_str = pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')
     #    date_unixtime = time.mktime(pd.Timestamp.now().to_datetime().timetuple())
-        date_unixtime =  time.mktime(datetime.datetime.now().timetuple())    
+        date_unixtime =  time.mktime(datetime.datetime.now().timetuple())
     else:
         # date_str = pd.Timestamp(date_e).strftime('%Y-%m-%d %H:%M:%S')
     #    date_unixtime = time.mktime(pd.Timestamp(date_e).to_datetime().timetuple())
@@ -273,20 +274,20 @@ def dashboard():
 #    js_heatmap = Template(open('../js/heatmap-script.js').read())
 #    js_movemap = Template(open('../js/movemap-script.js').read())
     template = Template(open('../dashboard.html').read())
-    
+
     heatmap_values = heatmap() # get values returned for the heatmap
     movemap_values = movemap() # get values returned for the movemap
     # substituing var in js with actual data
     html = template.substitute({'testData1': heatmap_values[0], 'testDataList1': heatmap_values[1], 'debug1': heatmap_values[2], 'testData2': movemap_values[0], 'testDataList2': movemap_values[1], 'debug2': movemap_values[2]})
-    
+
     print('Content-type: text/html\n')
     print('')
     # print the html result into a file for debug
-    html_file = open("../result-dash.html", "w")
-    html_file.write(html)
-    html_file.close()
-    
+#    html_file = open("../result-dash.html", "w")
+#    html_file.write(html)
+#    html_file.close()
+
     # print the result in the browser
     print(html)
-    
+
 dashboard()
