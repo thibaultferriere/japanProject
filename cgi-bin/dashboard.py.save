@@ -20,11 +20,6 @@ handler.setFormatter(Formatter('%(asctime)s %(name)s %(levelname)s %(message)s')
 logger.addHandler(handler)
 
 def heatmap():
-    
-    browsing_range = 60*60*5
-    browsing_interval = 60*3
-    browsing_offset = -browsing_range + 3600 - 120
-    
     def to_unixtime(pd_ts):
         return int(time.mktime(pd_ts.timetuple()))
 
@@ -40,7 +35,7 @@ def heatmap():
     if date_e is None:
         # date_str = pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')
     #    date_unixtime = time.mktime(pd.Timestamp.now().to_datetime().timetuple())
-        date_unixtime =  int(time.mktime(datetime.datetime.now().timetuple())) + browsing_offset
+        date_unixtime =  time.mktime(datetime.datetime.now().timetuple())
     else:
         # date_str = pd.Timestamp(date_e).strftime('%Y-%m-%d %H:%M:%S')
     #    date_unixtime = time.mktime(pd.Timestamp(date_e).to_datetime().timetuple())
@@ -49,15 +44,13 @@ def heatmap():
         date_e_tmp = date_e[:4] + "/" + date_e[4:6] + "/" + date_e[6:8] + " " + date_e[8:10] + ":" + date_e[10:12]
     #    print(date_e_tmp)
         date_e = date_e_tmp
-        date_unixtime = int(time.mktime(datetime.datetime.strptime(date_e, "%Y/%m/%d %H:%M").timetuple()))
-    now_unixtime = int(time.mktime(datetime.datetime.now().timetuple()))
-    forecast_limit_unixtime = now_unixtime + 3600 - 120
+        date_unixtime = time.mktime(datetime.datetime.strptime(date_e, "%Y/%m/%d %H:%M").timetuple())
     # html = t.substitute({'sent': '送信しました' if flag_sent else ''})
     # debug = date_str
     debug = str(pd.Timestamp(date_e))
 
     dbname = 'campustraffic'
-#    tblname = 'campus_nowcasts_scaled'
+    tblname = 'campus_nowcasts_scaled'
     #con = MySQLdb.connect(host='192.168.0.51', user='crw', passwd='receiver00', db='aibeacon')
     con = MySQLdb.connect(host='localhost', user='student', passwd='crw2018', db='campustraffic')
     #query = 'select * from alldata order by timestamp desc limit 100'
@@ -65,8 +58,6 @@ def heatmap():
     #query = 'select * from campus_nowcasts order by calculated_at desc limit 100'
 
     def getJSONforCongestion(date_unixtime):
-        nowcast_flag = True if date_unixtime <= now_unixtime - 120 else False
-        tblname = 'campus_nowcasts_scaled' if nowcast_flag else 'campus_forecasts_scaled'
         query = 'select * from {} where calculated_at < "{}" order by calculated_at desc limit 50'.format(tblname, date_unixtime)
     # query = 'select * from {} order by created desc limit 100'.format(tblname)
         df = pandasql.read_sql(query, con)
@@ -102,10 +93,7 @@ def heatmap():
         df2 = pd.merge(df, coord, on='spot_id', how='inner')
         # debug = debug + str(df2)
         df2.to_csv('../tmp.csv', index=False)
-        if nowcast_flag:
-            df2['calculated_at'] = df2['calculated_at'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M:%S'))
-        else:
-            df2['calculated_at'] = df2['calculated_at'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M:%S (forecast)'))
+        df2['calculated_at'] = df2['calculated_at'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M:%S'))
     # json.dump(df2.to_dict('records'), open('./tmp.json', 'w'))
         testData = {'max':100, 'data':df2.to_dict('records')}
         testData_str = json.dumps(testData)
@@ -124,10 +112,10 @@ def heatmap():
     # while date_i < date_unixtime + 60*600:
     #while date_i < date_unixtime + 60*300:
     #while date_i < date_unixtime + 60*60*16:
-    while date_i < date_unixtime + browsing_range and date_i < forecast_limit_unixtime:
+    while date_i < date_unixtime + 60*60*5:
         testData = getJSONforCongestion(date_i)
         testDataList.append(testData)
-        date_i = date_i + browsing_interval
+        date_i = date_i + 60*3
         # logger.error(str(date_i))
         pass
     testDataList_str = json.dumps(testDataList)
@@ -142,11 +130,6 @@ def heatmap():
 #    print(html)
 
 def movemap():
-    
-    browsing_range = 60*60*5
-#    browsing_interval = 60*3
-    browsing_offset = -browsing_range + 3600 - 120
-
     # 注意[lng, lat]
     dict_SpotCoord = {
         1: [130.222394, 33.596531],
@@ -226,7 +209,7 @@ def movemap():
     date_e = fs.getfirst('datetime', None)
     if date_e is None:
     #    date_unixtime = time.mktime(pd.to_datetime('2017-09-16 00:00').timetuple())
-        date_unixtime =  int(time.mktime(datetime.datetime.now().timetuple())) + browsing_offset
+        date_unixtime =  time.mktime(datetime.datetime.now().timetuple())
         # date_unixtime = time.mktime(pd.Timestamp.now().to_datetime().timetuple()) # 現在までのデータがローカルにはないから9/17 
     else:
     #    date_unixtime = time.mktime(pd.Timestamp(date_e).to_datetime().timetuple())
@@ -234,7 +217,7 @@ def movemap():
         date_e_tmp = date_e[:4] + "/" + date_e[4:6] + "/" + date_e[6:8] + " " + date_e[8:10] + ":" + date_e[10:12]
     #    print(date_e_tmp)
         date_e = date_e_tmp
-        date_unixtime = int(time.mktime(datetime.datetime.strptime(date_e, "%Y/%m/%d %H:%M").timetuple()))
+        date_unixtime = time.mktime(datetime.datetime.strptime(date_e, "%Y/%m/%d %H:%M").timetuple())
     debug = str(pd.Timestamp(date_e))
 
     dbname = 'campusanalytics'
