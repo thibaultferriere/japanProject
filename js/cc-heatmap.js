@@ -107,7 +107,7 @@ function heatmap(){
     // 	.bindPopup("Hello! Leaflet!<br>Aaaah!!!")
     // 	.addTo(map);// don't forget to include leaflet-heatmap.js
     for(var i=0; i<testDataList[0]['data'].length; i++) {
-        console.log(testDataList[0]['data'][i]);
+//        console.log(testDataList[0]['data'][i]);
         var marker = L.marker([testDataList[0]['data'][i]["lat"], testDataList[0]['data'][i]["lng"]])
             //.bindPopup("Hello! Leaflet!<br>Aaaah!!!")
             .bindPopup(testDataList[0]['data'][i]["spot_name"])
@@ -153,7 +153,7 @@ function heatmap(){
         if(fPlay_heatmap) {
             heatmapLayerList[iCurrentLayer].removeFrom(map);
             iCurrentLayer = iNextLayer_heatmap;
-            console.log(iNextLayer_heatmap);
+//            console.log(iNextLayer_heatmap);
             iNextLayer_heatmap++;
             if(iNextLayer_heatmap == heatmapLayerList.length) {
                 iNextLayer_heatmap = 0;

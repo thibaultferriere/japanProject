@@ -22,3 +22,16 @@
     width:100%;
     height:100%; 
 }
+
+.map-controller{
+    display:flex;
+    align-items: center;
+}
+
+.map-controller > * {
+    margin-right: 5px;
+}
+
+.show-hide{
+    margin-left: 50px;
+}
