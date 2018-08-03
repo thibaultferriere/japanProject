@@ -101,7 +101,7 @@ def heatmap():
         ], columns=['spot_id', 'lat', 'lng', 'spot_name'])
         df2 = pd.merge(df, coord, on='spot_id', how='inner')
         # debug = debug + str(df2)
-        df2.to_csv('../tmp.csv', index=False)
+#        df2.to_csv('../tmp.csv', index=False)
         if nowcast_flag:
             df2['calculated_at'] = df2['calculated_at'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M:%S'))
         else:
@@ -118,7 +118,7 @@ def heatmap():
         return json.dumps(testData)
 
     testData_str = getJSONStrforCongestion(date_unixtime)
-    open('../tmp.txt', 'w').write(testData_str)
+#    open('../tmp.txt', 'w').write(testData_str)
     testDataList = []
     date_i = date_unixtime
     # while date_i < date_unixtime + 60*600:
@@ -131,7 +131,7 @@ def heatmap():
         # logger.error(str(date_i))
         pass
     testDataList_str = json.dumps(testDataList)
-    open('../tmp.txt', 'w').write(testDataList_str)
+#    open('../tmp.txt', 'w').write(testDataList_str)
 
     # html = t.substitute({'testData':testData_str, 'debug':debug})
 #    html = t.substitute({'testData':testData_str, 'testDataList':testDataList_str, 'debug':debug})
