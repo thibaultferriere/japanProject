@@ -86,18 +86,6 @@ for (var i = 0; i < spotCoordList.length; i++) {
   }
 }
 
-// var movemapLayer = new L.migrationLayer({
-//       map: lrmap,
-//       data: testData['data'],
-//       pulseRadius: 0.1,
-//       pulseBorderWidth: 0.1,
-//       arcLabel: false,
-//       }
-// );
-// console.log(movemapLayer);
-// movemapLayer.addTo(lrmap);
-// movemapLayer.destroy();
-
 //making layerlist of movemap
 movemapLayerList = [];
 for (var i = 0; i < movemapDataList.length; i++) {
@@ -112,7 +100,6 @@ for (var i = 0; i < movemapDataList.length; i++) {
   movemapLayerList.push(Layer);
 }
 console.log(movemapLayerList);
-// movemapLayer.destroy();//これじゃダメ
 movemapLayerList[0].addTo(lrmap);
 
 var iCurrentLayer = 0;
@@ -121,46 +108,15 @@ if (iNextLayer == movemapDataList.length) {
   iNextLayer = 0;
 }
 
-//console.warn(movemapLayerList[iCurrentLayer]);
 var id = setInterval(function () {
   if (fPlay_movemap) {
-//    movemapLayerList[iCurrentLayer].destroy();//これじゃダメ
-//    console.log(movemapLayerList[iCurrentLayer]);
-//    iCurrentLayer = iNextLayer;
-//    console.log(iNextLayer);
-//    movemapLayerList[iNextLayer].addTo(lrmap);
-//    iNextLayer++;
     movemapLayerList[iCurrentLayer].setData(movemapDataList[iNextLayer]['data']);
     $("#current_date_movemap").text(movemapDataList[iNextLayer]['time']);
     $("#pos_play_movemap").val(iNextLayer / movemapDataList.length * 30);
 
     iNextLayer++;
     if (iNextLayer == movemapDataList.length) {
-//      clearInterval(id)
         iNextLayer = 0;
     }
-    // movemapLayerList[iCurrentLayer].setData(testDataList[iNextLayer]['data'])
-
-    // if(!!Layer){
-    //     Layer.destroy();
-    // }
-    // iCurrentLayer = iNextLayer;
-    // console.log(iNextLayer);
-    // iNextLayer++;
-    // if(iNextLayer == testDataList.length) {
-    //     iNextLayer = 0;
-    // }
-    // // movemapLayerList[iCurrentLayer].addTo(lrmap);
-    // var Layer = new L.migrationLayer({
-    //     map: lrmap,
-    //     data: testDataList[iNextLayer]['data'],
-    //     pulseRadius: 0.1,
-    //     pulseBorderWidth: 0.1,
-    //     arcLabel: false,
-    // });
-    // console.log(Layer);
-    // Layer.addTo(lrmap);
-    // $("#current_date").text(testDataList[iCurrentLayer]['time']);
-    // $("#pos_play").val(iCurrentLayer/testDataList.length*30);
   }
 }, 3000);
