@@ -29,56 +29,29 @@ def heatmap():
         return int(time.mktime(pd_ts.timetuple()))
 
     fs = cgi.FieldStorage()
-#    print('Content-type: text/html\n')
-#    t = Template(open('../template_index.html').read())
-    # message = fs.getfirst('message', None)
-    # if message is not None:
-    #     flag_sent = True
-    # else:
-    #     flag_sent = False
     date_e = fs.getfirst('datetime', None)
     if date_e is None:
-        # date_str = pd.Timestamp.now().strftime('%Y-%m-%d %H:%M:%S')
-    #    date_unixtime = time.mktime(pd.Timestamp.now().to_datetime().timetuple())
         date_unixtime =  int(time.mktime(datetime.datetime.now().timetuple())) + browsing_offset
     else:
-        # date_str = pd.Timestamp(date_e).strftime('%Y-%m-%d %H:%M:%S')
-    #    date_unixtime = time.mktime(pd.Timestamp(date_e).to_datetime().timetuple())
-    #    print(date_e)
         # formatting the string passed in the form so i is %Y/%m/%d %H:%M
         date_e_tmp = date_e[:4] + "/" + date_e[4:6] + "/" + date_e[6:8] + " " + date_e[8:10] + ":" + date_e[10:12]
-    #    print(date_e_tmp)
         date_e = date_e_tmp
         date_unixtime = int(time.mktime(datetime.datetime.strptime(date_e, "%Y/%m/%d %H:%M").timetuple()))
     now_unixtime = int(time.mktime(datetime.datetime.now().timetuple()))
     forecast_limit_unixtime = now_unixtime + 3600 - 120
-    # html = t.substitute({'sent': '送信しました' if flag_sent else ''})
-    # debug = date_str
     debug = str(pd.Timestamp(date_e))
 
     dbname = 'campustraffic'
-#    tblname = 'campus_nowcasts_scaled'
-    #con = MySQLdb.connect(host='192.168.0.51', user='crw', passwd='receiver00', db='aibeacon')
     con = MySQLdb.connect(host='localhost', user='student', passwd='crw2018', db='campustraffic')
-    #query = 'select * from alldata order by timestamp desc limit 100'
-    #query = 'select * from unit_spot_lut'
-    #query = 'select * from campus_nowcasts order by calculated_at desc limit 100'
 
     def getJSONforCongestion(date_unixtime):
         nowcast_flag = True if date_unixtime <= now_unixtime - 120 else False
         tblname = 'campus_nowcasts_scaled' if nowcast_flag else 'campus_forecasts_scaled'
         query = 'select * from {} where calculated_at < "{}" order by calculated_at desc limit 50'.format(tblname, date_unixtime)
-    # query = 'select * from {} order by created desc limit 100'.format(tblname)
         df = pandasql.read_sql(query, con)
-    # data.to_csv('./{}_{}.csv'.format(dbname, tblname), index=False)
-    # debug = debug + str([str(pd.Timestamp(d)) for d in df['calculated_at']])
         df['calculated_at'] = df['calculated_at'].apply(pd.Timestamp.fromtimestamp)
         df = df.ix[df.groupby('spot_id')['calculated_at'].idxmax()][['spot_id', 'congestion', 'calculated_at']]
         df.columns = ['spot_id', 'count', 'calculated_at']
-        # df = df.pivot_table(index='calculated_at', columns='spot_id', values='congestion')
-    # df.to_csv('./tmp.csv', index=False)
-    # df.to_json('./tmp.json', orient='records')
-        # coord = pd.DataFrame([(1, 33.596531, 130.222394), (4, 33.596632, 130.222811)], columns=['spot_id', 'lat', 'lng'])
         coord = pd.DataFrame([
             (1, 33.596531, 130.222394, 'Dining hall A'),
             (2, 33.597103, 130.223915, 'Dining hall B'),
@@ -100,17 +73,12 @@ def heatmap():
             (18, 33.597645, 130.221516, 'Bus stop B'),
         ], columns=['spot_id', 'lat', 'lng', 'spot_name'])
         df2 = pd.merge(df, coord, on='spot_id', how='inner')
-        # debug = debug + str(df2)
-#        df2.to_csv('../tmp.csv', index=False)
         if nowcast_flag:
             df2['calculated_at'] = df2['calculated_at'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M:%S'))
         else:
             df2['calculated_at'] = df2['calculated_at'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M:%S (forecast)'))
-    # json.dump(df2.to_dict('records'), open('./tmp.json', 'w'))
         testData = {'max':100, 'data':df2.to_dict('records')}
         testData_str = json.dumps(testData)
-        # testData_str = json.dumps({'max':100, 'data':df2.to_dict('index')})
-        # return testData_str
         return testData
 
     def getJSONStrforCongestion(date_unixtime):
@@ -118,28 +86,19 @@ def heatmap():
         return json.dumps(testData)
 
     testData_str = getJSONStrforCongestion(date_unixtime)
-#    open('../tmp.txt', 'w').write(testData_str)
     testDataList = []
     date_i = date_unixtime
-    # while date_i < date_unixtime + 60*600:
-    #while date_i < date_unixtime + 60*300:
-    #while date_i < date_unixtime + 60*60*16:
     while date_i < date_unixtime + browsing_range and date_i < forecast_limit_unixtime:
         testData = getJSONforCongestion(date_i)
         testDataList.append(testData)
         date_i = date_i + browsing_interval
-        # logger.error(str(date_i))
         pass
     testDataList_str = json.dumps(testDataList)
-#    open('../tmp.txt', 'w').write(testDataList_str)
 
-    # html = t.substitute({'testData':testData_str, 'debug':debug})
-#    html = t.substitute({'testData':testData_str, 'testDataList':testDataList_str, 'debug':debug})
     testData1 = testData_str
     testDataList1 = testDataList_str
     debug1 = debug
     return testData1, testDataList1, debug1
-#    print(html)
 
 def movemap():
     
@@ -220,28 +179,19 @@ def movemap():
 
 
     fs = cgi.FieldStorage()
-#    print('Content-type: text/html\n')
-#    t = Template(open('../template_movemapindex.html').read())
 
     date_e = fs.getfirst('datetime', None)
     if date_e is None:
-    #    date_unixtime = time.mktime(pd.to_datetime('2017-09-16 00:00').timetuple())
         date_unixtime =  int(time.mktime(datetime.datetime.now().timetuple())) + browsing_offset
-        # date_unixtime = time.mktime(pd.Timestamp.now().to_datetime().timetuple()) # 現在までのデータがローカルにはないから9/17 
     else:
-    #    date_unixtime = time.mktime(pd.Timestamp(date_e).to_datetime().timetuple())
         # formatting the string passed in the form so i is %Y/%m/%d %H:%M
         date_e_tmp = date_e[:4] + "/" + date_e[4:6] + "/" + date_e[6:8] + " " + date_e[8:10] + ":" + date_e[10:12]
-    #    print(date_e_tmp)
         date_e = date_e_tmp
         date_unixtime = int(time.mktime(datetime.datetime.strptime(date_e, "%Y/%m/%d %H:%M").timetuple()))
     debug = str(pd.Timestamp(date_e))
 
     dbname = 'campusanalytics'
     tblname = 'movecount_10m'
-
-#    con = pymysql.connect(host='localhost', user='student', passwd='crw2018', db=dbname)
-#   PyMySQL connector not working properly; switched to MySQLdb connector
     con = MySQLdb.connect(host='localhost', user='student', passwd='crw2018', db=dbname)
 
 
@@ -256,7 +206,6 @@ def movemap():
             colorcode = conv_total_color(v['total'])
             series_df2 = pd.Series([dict_SpotCoord[v['unit_from']], dict_SpotCoord[v['unit_to']], [dict_SpotName[v['unit_from']], dict_SpotName[v['unit_to']]], colorcode], index=df2.columns)
             df2 = df2.append(series_df2, ignore_index=True)
-        # df2.to_csv('./tmp.csv', index=False)
         time = datetime.datetime.fromtimestamp(date_unixtime).strftime('%Y-%m-%d %H:%M:%S')
         testData = {'time': time, 'data': df2.to_dict('records')}
         return testData
@@ -268,7 +217,6 @@ def movemap():
 
 
     testData_str = getJSONStrforMoveCount(date_unixtime)
-    # open('./tmp.txt', 'w').write(testData_str)
     testDataList = []
     date_i = date_unixtime
 
@@ -276,22 +224,15 @@ def movemap():
         testData = getJSONforMoveCount(date_i)
         testDataList.append(testData)
         date_i = date_i + 60*10
-        # logger.error(str(date_i))
         pass
     testDataList_str = json.dumps(testDataList)
-    # open('./tmp.txt', 'w').write(testDataList_str)
 
-#    html = t.substitute({'testData': testData_str, 'testDataList': testDataList_str, 'debug': debug})
     testData2 = testData_str
     testDataList2 = testDataList_str
     debug2 = debug
     return testData2, testDataList2, debug
-#    print(html)
 
 def dashboard():
-    # open the HTML template here
-#    js_heatmap = Template(open('../js/heatmap-script.js').read())
-#    js_movemap = Template(open('../js/movemap-script.js').read())
     template = Template(open('../dashboard.html').read())
 
     heatmap_values = heatmap() # get values returned for the heatmap
@@ -301,10 +242,6 @@ def dashboard():
 
     print('Content-type: text/html\n')
     print('')
-    # print the html result into a file for debug
-#    html_file = open("../result-dash.html", "w")
-#    html_file.write(html)
-#    html_file.close()
 
     # print the result in the browser
     print(html)

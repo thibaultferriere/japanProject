@@ -63,18 +63,6 @@
                 </div>
                 <!-- div containing movemap -->
                 <div class="col-md-6" id="movemap-wrapper">
-<!--
-                    <div>
-                        <form action="./dashboard.py" method="get" onsubmit="return compose_datetime_movemap();">
-                            <input type="text" id="datepicker_movemap">
-                            <select id="select_hour_movemap"></select>
-                            :
-                            <select id="select_minute_movemap"></select>
-                            <button type="submit" value="go">GO</button>
-                            <input type="hidden" name="datetime" id="input_datetime_movemap">
-                        </form>
-                    </div>
--->
                     <h2>Movemap</h2>
                     <div class="movemap-wrapper">
                         <div class="movemap" id="map-canvas-movemap">
@@ -117,7 +105,6 @@
             var picker = new Pikaday({ field: document.getElementById('datepicker_heatmap') });
 
             for(var i=0; i<24; i++) {
-                //$$("#select_hour").append($$("<option>").val(i).text(i));
                 var hour = ("00"+i).slice(-2);
                 $$("#select_hour_heatmap").append($$("<option>").val(hour).text(hour));
             }
@@ -188,15 +175,10 @@
             }
 
             function jump_heatmap() {
-//                console.warn('current value iNextLayer_heatmap: ' + iNextLayer_heatmap);
-//                console.warn('length: ' + testDataList.length + ' valeur: ' + $$("#pos_play_heatmap").val() + ' divisor: ' + divisor);
                 iNextLayer_heatmap = testDataList.length * $$("#pos_play_heatmap").val() / 100;
-//                console.warn('new value iNextLayer_heatmap: ' + iNextLayer_heatmap);
             }
             </script>
             <script type="text/javascript">
-//            movemapData = JSON.parse('${testData2}');
-//            movemapDataList = JSON.parse('${testDataList2}');
             console.log(movemapData);
             console.log(movemapDataList);
                 
@@ -205,7 +187,6 @@
             var picker = new Pikaday({ field: document.getElementById('datepicker_movemap') });
 
             for(var i=0; i<24; i++) {
-                //$$("#select_hour").append($$("<option>").val(i).text(i));
                 var hour = ("00"+i).slice(-2);
                 $$("#select_hour_movemap").append($$("<option>").val(hour).text(hour));
             }
@@ -276,11 +257,7 @@
             }
 
             function jump_movemap() {
-//                console.warn('current value iNextLayer: ' + iNextLayer);
-//                var divisor = 100;
-//                console.warn('length: ' + movemapDataList.length + ' valeur: ' + $$("#pos_play_movemap").val());
                 iNextLayer = movemapDataList.length * $$("#pos_play_movemap").val() / 30;
-//                console.warn('new value iNextLayer: ' + iNextLayer);
             }
             </script>
             <script type="text/javascript" src="/js/cc-movemap.js"></script>
