@@ -74,8 +74,10 @@ def heatmap():
         ], columns=['spot_id', 'lat', 'lng', 'spot_name'])
         df2 = pd.merge(df, coord, on='spot_id', how='inner')
         if nowcast_flag:
+            #applying anonymous function that allows to convert x to string
             df2['calculated_at'] = df2['calculated_at'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M:%S'))
         else:
+            #applying anonymous function that allows to convert x to string
             df2['calculated_at'] = df2['calculated_at'].apply(lambda x: x.strftime('%Y-%m-%d %H:%M:%S (forecast)'))
         testData = {'max':100, 'data':df2.to_dict('records')}
         testData_str = json.dumps(testData)

@@ -59,11 +59,11 @@ function heatmap(){
 
     var heatmapLayer = new HeatmapOverlay(cfg);
 
-    console.log(cfg);
-    console.log(cfg2);
+//    console.log(cfg);
+//    console.log(cfg2);
     var heatmapLayer2 = new HeatmapOverlay(cfg2);
-    console.log(baseLayer);
-    console.log(heatmapLayer);
+//    console.log(baseLayer);
+//    console.log(heatmapLayer);
 
     heatmapLayer.setData(testData);
     heatmapLayer2.setData(testData2);
@@ -75,9 +75,9 @@ function heatmap(){
     });
     var b = {"base":baseLayer};
     var o = {"heatmap":heatmapLayer, "heatmap2":heatmapLayer2};
-    console.log(map);
-    console.log(heatmapLayer);
-    console.log(heatmapLayer2);
+//    console.log(map);
+//    console.log(heatmapLayer);
+//    console.log(heatmapLayer2);
     for(var i=0; i<testDataList[0]['data'].length; i++) {
         var marker = L.marker([testDataList[0]['data'][i]["lat"], testDataList[0]['data'][i]["lng"]])
             //.bindPopup("Hello! Leaflet!<br>Aaaah!!!")
@@ -92,7 +92,7 @@ function heatmap(){
         layer.setData(testDataList[i]);
         heatmapLayerList.push(layer);
     }
-    console.log(heatmapLayerList);
+//    console.log(heatmapLayerList);
     heatmapLayer.removeFrom(map);
     heatmapLayerList[0].addTo(map);
 

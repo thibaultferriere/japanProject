@@ -4,11 +4,11 @@ var baseLayer = L.tileLayer(
     maxZoom: 18
   }
 );
-console.log(baseLayer);
+//console.log(baseLayer);
 
 var lrmap = new L.map('map-canvas-movemap').setView([33.597324, 130.223160], 18);
 baseLayer.addTo(lrmap);
-console.log(lrmap);
+//console.log(lrmap);
 
 // lat, lng
 spotCoordList =[
@@ -88,18 +88,18 @@ for (var i = 0; i < spotCoordList.length; i++) {
 
 //making layerlist of movemap
 movemapLayerList = [];
-for (var i = 0; i < movemapDataList.length; i++) {
-  var Layer = new L.migrationLayer({
+//for (var i = 0; i < movemapDataList.length; i++) {
+var Layer = new L.migrationLayer({
     map: lrmap,
-    data: movemapDataList[i]['data'],
+    data: movemapDataList[0]['data'],
     pulseRadius: 0.1,
     arcWidth: 0.5,
     arcLabel: false,
-  }
-  );
-  movemapLayerList.push(Layer);
-}
-console.log(movemapLayerList);
+    }
+);
+movemapLayerList.push(Layer);
+//}
+//console.log(movemapLayerList);
 movemapLayerList[0].addTo(lrmap);
 
 var iCurrentLayer = 0;
