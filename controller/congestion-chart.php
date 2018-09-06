@@ -15,7 +15,12 @@
 	$conn = new PDO($dsn, $user, $password, $opt); //connection to the database    
 
     //Query to show congestion for a certain spot over time
-    $query = $conn->prepare('SELECT congestion, calculated_at FROM campus_nowcasts_scaled WHERE spot_id=1 limit 100');
+    $query = $conn->prepare('SELECT * FROM (SELECT id, congestion, calculated_at 
+                            FROM campus_nowcasts_scaled 
+                            WHERE spot_id=1 
+                            ORDER BY calculated_at DESC
+                            LIMIT 100) sub
+                            ORDER BY calculated_at ASC');
     $query->execute();
     $result = $query->fetchAll();
     foreach($result as  $index => $cell){
