@@ -1,8 +1,8 @@
 <?php
     $host = 'localhost';
 	$db = 'campustraffic';
-	$user = 'phpmyadmin';
-	$password = 'limu828';
+	$user = 'student';
+	$password = 'crw2018';
 
     $dsn = "mysql:host=$host;dbname=$db";
 
@@ -15,7 +15,7 @@
 	$conn = new PDO($dsn, $user, $password, $opt); //connection to the database    
 
     //Query to show congestion for a certain spot over time
-    $query = $conn->prepare('SELECT congestion, calculated_at FROM campus_nowcasts_scaled WHERE spot_id=1');
+    $query = $conn->prepare('SELECT congestion, calculated_at FROM campus_nowcasts_scaled WHERE spot_id=1 limit 100');
     $query->execute();
     $result = $query->fetchAll();
     foreach($result as  $index => $cell){

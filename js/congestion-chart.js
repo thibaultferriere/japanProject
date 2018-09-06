@@ -31,7 +31,7 @@ $.ajax({
             title: {
                 display: true,
                 position: "top",
-                text: "Congestion chart",
+                text: "Congestion chart for spot 1",
                 fontSize: 18,
                 fontColor: "#111"
             },
